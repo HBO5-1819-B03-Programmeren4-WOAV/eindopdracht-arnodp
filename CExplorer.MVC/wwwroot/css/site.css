@@ -1,0 +1,100 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-bottom: 20px;
+    background-color: #c0c0c0;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    margin-top:40px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+.CECarousel img {
+    width: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
+    min-height: 450px;
+    max-height: 450px;
+    height: 450px;
+}
+.CECarousel {
+    border-bottom: solid 20px #222222;
+    border-top: solid 20px #222222;
+}
+.CENavBar {
+    position: absolute;
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 0px;
+    font-size: 20px;
+    border-bottom: solid 1px #222222;
+}
+
+.Footer {
+    bottom: 0;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #222222;
+    border-bottom: none;
+    max-height: calc(100% - 400px);
+    overflow: auto;
+    padding-top: 30px;
+    color: #9d9d9d;
+}
+
+
+.container {
+    letter-spacing: 1px;
+}
+
+.LeftSideBar {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 5px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 540px; /* Stay at the top */
+    left: 0;
+    background-color: #222222; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20%;
+}
+.RightSideBar {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 5px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 540px; /* Stay at the top */
+    right: 0;
+    background-color: #222222; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+}
+

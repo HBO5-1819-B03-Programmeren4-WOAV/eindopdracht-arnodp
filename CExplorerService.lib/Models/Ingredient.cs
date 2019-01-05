@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using CExplorerService.lib.Models.Base;
+using System.Collections.Generic;
 
 namespace CExplorerService.lib.Models
 {
-    public class Ingredient 
+    public class Ingredient : EntityBase
     {
-        [Key]
-        public int Id { get; set; }
-
         public IngredientBase IngredientBase { get; set; }
         public double Volume { get; set; }
         public string Dosage { get; set; }

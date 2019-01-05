@@ -1,7 +1,6 @@
 ﻿using CExplorerService.lib.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace CExplorerService.WebAPI.Data
 {
     public class CExplorerServiceContext : DbContext
@@ -105,7 +104,6 @@ namespace CExplorerService.WebAPI.Data
                 .WithOne(ci => ci.Cocktail);
 
             base.OnModelCreating(modelBuilder);
-
         }
     }
 }

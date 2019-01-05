@@ -1,8 +1,9 @@
-﻿namespace CExplorerService.lib.Models
+﻿using CExplorerService.lib.Models.Base;
+
+namespace CExplorerService.lib.Models
 {
-    public class IngredientBase
+    public class IngredientBase : EntityBase
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

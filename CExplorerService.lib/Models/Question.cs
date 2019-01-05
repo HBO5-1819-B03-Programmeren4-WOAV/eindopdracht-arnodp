@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CExplorerService.lib.Models.Base;
 
 namespace CExplorerService.lib.Models
 {
-    public class QuestionBase
+    public class QuestionBase : EntityBase
     {
-        [Key]
-        public int Id { get; set; }
-
         public string Question { get; set; }
     }
 }
