@@ -52,7 +52,7 @@ namespace CExplorerService.WebAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IngredientBaseId = table.Column<int>(nullable: false),
+                    IngredientBaseId = table.Column<int>(nullable: true),
                     Volume = table.Column<double>(nullable: false),
                     Dosage = table.Column<string>(nullable: true)
                 },
@@ -64,7 +64,7 @@ namespace CExplorerService.WebAPI.Migrations
                         column: x => x.IngredientBaseId,
                         principalTable: "IngredientBases",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,7 +74,7 @@ namespace CExplorerService.WebAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    OriginId = table.Column<int>(nullable: false)
+                    OriginId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,7 +84,7 @@ namespace CExplorerService.WebAPI.Migrations
                         column: x => x.OriginId,
                         principalTable: "Origins",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

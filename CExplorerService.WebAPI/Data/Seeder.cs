@@ -62,7 +62,7 @@ namespace CExplorerService.WebAPI.Data
                 new Ingredient { IngredientBase = IngredientBases[17], Volume = 4.5, Dosage = "cl" },//20
                 new Ingredient { IngredientBase = IngredientBases[7], Volume = 3, Dosage = "cl" },//21
                 new Ingredient { IngredientBase = IngredientBases[15], Volume = 2, Dosage = "cl" },//22
-                new Ingredient { IngredientBase = IngredientBases[18], Volume = 1, Dosage = "" }//23
+                new Ingredient { IngredientBase = IngredientBases[18], Volume = 1, Dosage = "0" }//23
             };
 
             var Origins = new Origin[]

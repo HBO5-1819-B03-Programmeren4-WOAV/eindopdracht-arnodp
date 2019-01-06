@@ -1,2 +1,59 @@
-﻿<h2>Recipes</h2>
+﻿@using CExplorerService.lib.DTO
+@model List<CocktailBasic>
 
+<h2>Recipes</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+            @foreach(CocktailBasic cocktail in Model)
+            {
+                <li>
+                    <b><a href="#" data-id="@cocktail.Id" class="Cocktail">@cocktail.Name</a></b>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#ToggleOrders").click(function () {   //button id
+                    $("#Orders").toggle(1000);           //div id
+                });
+            });
+
+            $(document).ready(function () {
+                $("#ToggleForm").click(function () {
+                    $("#Form").toggle(1000);
+                });
+            });
+        </script>
+    </head>*@

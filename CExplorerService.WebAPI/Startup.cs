@@ -1,4 +1,6 @@
 ﻿using CExplorerService.WebAPI.Data;
+using CExplorerService.WebAPI.Repositories;
+using CExplorerService.WebAPI.Services.AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +22,19 @@ namespace CExplorerService.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new AutoMapperProfileConfiguration());
+            });
+
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<CExplorerServiceContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("CExplorerService")));
+
+            services.AddScoped<CocktailRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
