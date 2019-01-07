@@ -29,6 +29,7 @@ namespace CExplorerService.WebAPI
 
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddCors();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<CExplorerServiceContext>(options =>
@@ -47,7 +48,7 @@ namespace CExplorerService.WebAPI
                     .CreateScope())
                 {
                     var context = serviceScope.ServiceProvider.GetService<CExplorerServiceContext>(); //get DbContext 
-                    Seeder.Seed(context);
+                    //Seeder.Seed(context);
                 }
             }
             else
@@ -56,6 +57,13 @@ namespace CExplorerService.WebAPI
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseCors(builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+
             app.UseMvc();
         }
     }

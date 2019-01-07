@@ -6,9 +6,12 @@ namespace CExplorerService.lib.Models
     public class Ingredient : EntityBase
     {
         public IngredientBase IngredientBase { get; set; }
+        public int IngredientBaseId { get; set; }
+
         public double Volume { get; set; }
         public string Dosage { get; set; }
 
-        public virtual ICollection<CocktailIngredient> CocktailsWithIngredients { get; set; }
+        public int CocktailId { get; set; }
+        public Cocktail Cocktail { get; set; }
     }
 }

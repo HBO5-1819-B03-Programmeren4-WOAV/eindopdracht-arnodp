@@ -21,7 +21,6 @@ namespace CExplorerService.WebAPI.Repositories
         {
            var test = await db.Cocktails
                 .Include(c => c.Origin)
-                .Include(c => c.CocktailIngredients)
                 .ToListAsync();
             return test;
         }

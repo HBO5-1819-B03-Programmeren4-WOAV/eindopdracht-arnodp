@@ -6,7 +6,10 @@ namespace CExplorerService.lib.Models
     public class Cocktail : EntityBase
     {
         public string Name { get; set; }
+
+        public int OriginId { get; set; }
         public Origin Origin { get; set; }
-        public virtual ICollection<CocktailIngredient> CocktailIngredients { get; set; }
+
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
     }
 }
