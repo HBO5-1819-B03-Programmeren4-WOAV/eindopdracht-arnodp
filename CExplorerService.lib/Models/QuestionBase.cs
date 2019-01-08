@@ -5,5 +5,6 @@ namespace CExplorerService.lib.Models
     public class QuestionBase : EntityBase
     {
         public string Question { get; set; }
+        public string Partial { get; set; }
     }
 }

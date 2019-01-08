@@ -96,4 +96,23 @@ body {
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
 }
-
+.Cocktail {
+    color: #333333;
+    font-size: large;
+    list-style-type: none;
+    margin: 5px;
+    padding: 0;
+}
+.Cocktail :hover{
+    color: black;
+}
+li {
+    list-style-type: none;
+    margin: 5px;
+    color: #333333;
+    font-size: large;
+    padding: 0;
+}
+a:hover {
+    color: black;
+}
