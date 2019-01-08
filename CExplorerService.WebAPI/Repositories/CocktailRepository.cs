@@ -16,28 +16,17 @@ namespace CExplorerService.WebAPI.Repositories
         public CocktailRepository(CExplorerServiceContext context, IMapper mapper) : base(context, mapper)
         { }
 
-
-        public async Task<List<Cocktail>> GetAllInclusive()
+        public async Task<List<Cocktail>> GetCocktailWithOrigin()
         {
-           var test = await db.Cocktails
-                .Include(c => c.Origin)
-                .ToListAsync();
-            return test;
+            return (await db.Cocktails
+                 .Include(c => c.Origin)
+                 .ToListAsync());
         }
 
-
-            public async Task<List<CocktailBasic>> ListBasic()
+        public async Task<List<CocktailBasic>> ListBasic()
         {
-            var cocktails = await db.Cocktails.Select(c => new CocktailBasic
-            {
-                Id = c.Id,
-                Name = c.Name
-            }).ToListAsync();
-
-            return cocktails;
-
-            //return await db.Cocktails.ProjectTo<CocktailBasic>(mapper.ConfigurationProvider)
-            //    .OrderBy(c => c.Name).ToListAsync();
+            return await db.Cocktails.ProjectTo<CocktailBasic>(mapper.ConfigurationProvider)
+                .OrderBy(c => c.Name).ToListAsync();
         }
     }
 }

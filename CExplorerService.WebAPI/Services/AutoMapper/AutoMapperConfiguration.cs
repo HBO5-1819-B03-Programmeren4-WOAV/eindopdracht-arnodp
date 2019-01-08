@@ -10,6 +10,9 @@ namespace CExplorerService.WebAPI.Services.AutoMapper
         protected AutoMapperProfileConfiguration(string profileName) : base(profileName)
         {
             CreateMap<CocktailBasic, Cocktail>();
+            CreateMap<Ingredient, IngredientBasic>()
+                .ForMember(dest => dest.name,
+                opts => opts.MapFrom(src => src.IngredientBase.Name));  
         }
     }
 }

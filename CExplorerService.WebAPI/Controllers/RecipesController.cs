@@ -16,15 +16,14 @@ namespace CExplorerService.WebAPI.Controllers
         [HttpGet]
         public override async Task<IActionResult> Get()
         {
-            return Ok(await repository.GetAllInclusive());
+            return Ok(await repository.GetCocktailWithOrigin());
         }
 
         [HttpGet]
         [Route("Basic")]
         public async Task<IActionResult> GetCocktailBasic()
         {
-            var cocktails = await repository.ListBasic();
-            return Ok(cocktails);
+            return Ok(await repository.ListBasic());
         }
     }
 }
