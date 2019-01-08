@@ -59,7 +59,7 @@ namespace CExplorerService.WebAPI.Data
 
             modelBuilder.Entity<Ingredient>().ToTable("Ingredient").HasData(
                 new Ingredient { CocktailId = 1, Id = 1, IngredientBaseId = 1, Volume = 5, Dosage = "cl" },
-                new Ingredient { CocktailId = 1, Id = 2, IngredientBaseId = 2, Volume = 1 / 2, Dosage = "cut into 4 wedges" },
+                new Ingredient { CocktailId = 1, Id = 2, IngredientBaseId = 2, Volume = .5, Dosage = "cut into 4 wedges" },
                 new Ingredient { CocktailId = 1, Id = 3, IngredientBaseId = 3, Volume = 2, Dosage = "teaspoons" },
 
                 new Ingredient { CocktailId = 2, Id = 4, IngredientBaseId = 4, Volume = 4, Dosage = "cl" },

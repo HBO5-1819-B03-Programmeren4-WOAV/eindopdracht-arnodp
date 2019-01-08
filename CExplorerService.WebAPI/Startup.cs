@@ -45,20 +45,20 @@ namespace CExplorerService.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
-                    .CreateScope())
-                {
-                    var context = serviceScope.ServiceProvider.GetService<CExplorerServiceContext>(); //get DbContext 
-                    //Seeder.Seed(context);
-                }
+                //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                //    .CreateScope())
+                //{
+                //    var context = serviceScope.ServiceProvider.GetService<CExplorerServiceContext>(); //get DbContext 
+                //    //Seeder.Seed(context);
+                //}
             }
             else
             {
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            //app.UseHttpsRedirection();
+            //app.UseStaticFiles();
 
             app.UseCors(builder => builder
             .AllowAnyOrigin()

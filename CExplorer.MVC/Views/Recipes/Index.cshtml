@@ -1,33 +1,34 @@
 ﻿@using CExplorerService.lib.DTO
 @model List<CocktailBasic>
 
-<h2>Recipes</h2>
 
-<div class="row">
-    <div class="col-md-6">
+<div class="col-md-12">
+    <div class="col-md-4">
+        <h2>Recipes</h2>
         <ul class="list-group">
             @foreach (CocktailBasic cocktail in Model)
             {
                 <li>
-                    <b><a href="#" data-id="@cocktail.Id" class="Cocktail" onclick="find()">@cocktail.Name</a></b>
+                    <b><a href="#" data-id="@cocktail.Id" class="Cocktail">@cocktail.Name</a></b>
                 </li>
             }
         </ul>
     </div>
-</div>
 
-<div class="col-md-6">
-    <h2>Ingredients</h2>
-    <ul id="ingredients"></ul>
+    <div class="col-md-4">
+        <h2>Ingredients</h2>
+        <ul id="ingredients" class="list-group"></ul>
+    </div>
 </div>
 
 @section scripts
     {
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
         $(document).ready(function () {
-            
-            $('.cocktail').on('click', function () {
+
+            var url = 'https://localhost:44385/api/Ingredients/basic';
+
+            $(".Cocktail").on('click', function () {
                 $.getJSON(url + '/' + $(this).data('id'))
                     .done(function (data) {
                         $.each(data, function (key, item) {
@@ -35,51 +36,12 @@
                                 .appendTo($('#ingredients'));
                         })
                     });
+                $('#ingredients').empty();
             });
         });
 
         function formatItem(item) {
-            return item.name + item.Volume + item.Dosage;
+            return item.name + ' ' + item.volume + ' ' + item.dosage;
         }
     </script>
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*<head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("#ToggleOrders").click(function () {   //button id
-                    $("#Orders").toggle(1000);           //div id
-                });
-            });
-
-            $(document).ready(function () {
-                $("#ToggleForm").click(function () {
-                    $("#Form").toggle(1000);
-                });
-            });
-        </script>
-    </head>*@
+}  
