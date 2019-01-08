@@ -4,19 +4,45 @@
 <h2>Recipes</h2>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <ul class="list-group">
-            @foreach(CocktailBasic cocktail in Model)
+            @foreach (CocktailBasic cocktail in Model)
             {
                 <li>
-                    <b><a href="#" data-id="@cocktail.Id" class="Cocktail">@cocktail.Name</a></b>
+                    <b><a href="#" data-id="@cocktail.Id" class="Cocktail" onclick="find()">@cocktail.Name</a></b>
                 </li>
             }
         </ul>
     </div>
 </div>
 
+<div class="col-md-6">
+    <h2>Ingredients</h2>
+    <ul id="ingredients"></ul>
+</div>
 
+@section scripts
+    {
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+            $('.cocktail').on('click', function () {
+                $.getJSON(url + '/' + $(this).data('id'))
+                    .done(function (data) {
+                        $.each(data, function (key, item) {
+                            $('<li>', { text: formatItem(item) })
+                                .appendTo($('#ingredients'));
+                        })
+                    });
+            });
+        });
+
+        function formatItem(item) {
+            return item.name + item.Volume + item.Dosage;
+        }
+    </script>
+}
 
 
 

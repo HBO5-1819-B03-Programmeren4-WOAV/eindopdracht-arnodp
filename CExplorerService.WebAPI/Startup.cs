@@ -36,6 +36,7 @@ namespace CExplorerService.WebAPI
             options.UseSqlServer(Configuration.GetConnectionString("CExplorerService")));
 
             services.AddScoped<CocktailRepository>();
+            services.AddScoped<IngredientRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

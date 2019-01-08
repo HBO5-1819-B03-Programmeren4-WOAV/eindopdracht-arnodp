@@ -17,9 +17,16 @@ namespace CExplorerService.WebAPI.Controllers
         { }
         [HttpGet]
         [Route("basic")]
-        public async Task<IActionResult> GetIngredientsBasic()
+        public async Task<IActionResult> GetAllIngredientsBasic()
         {
-            return Ok(await repository.GetIngredientsBasic());
+            return Ok(await repository.GetAllIngredientsBasic());
+        }
+
+        [HttpGet]
+        [Route("basic/{id}")]
+        public async Task<IActionResult> GetIngredientsBasic(int id)
+        {
+            return Ok(await repository.GetIngredientsBasic(id));
         }
     }
 }
