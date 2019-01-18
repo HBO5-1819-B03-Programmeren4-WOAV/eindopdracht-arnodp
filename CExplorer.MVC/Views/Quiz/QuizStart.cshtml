@@ -13,6 +13,8 @@
     </div>
 
 
+
+
     <div class="col-md-12">
         <button class="nextbtn">Next</button>
     </div>
@@ -22,7 +24,7 @@
 @section scripts
 {
     <script>
-        var url = 'https://localhost:44385/api/Quiz/random';
+        var url = 'https://localhost:44385/api/Questions/random';
 
         $(document).ready(function () {
             $.getJSON(url)
@@ -35,6 +37,7 @@
             $(".nextbtn").on('click', function () {
                 $.getJSON(url)
                     .done(function (data) {
+                        ClearAll()
                         GetQuestionData(data)
                     });
             });
@@ -50,21 +53,39 @@
             else if (data.partial == "GuessOrigin") {
                 GetGuessOriginData();
             }
+            $('<h4>', { text: data.question }).appendTo($('#question'));
         }
+        
+        var Curl = 'https://localhost:44385/api/Cocktails';
+        var Iurl = 'https://localhost:44385/api/Ingredients';
 
         function GetGuessCocktailData() {
-            $('#question').empty();
-            $('<h4>', { text: 'GC' }).appendTo($('#question'));
+            fetch(Curl + '/random')
+                .then(responds => responds.json())
+                .then(function (data) {
+                    //save correct answer here, + set list ingred 
+                    fetch(Curl + '/randomlist' + data('id'))
+                        .then(responds => responds.json())
+                        .then(function (data) {
+                            //set answers here
+                        });
+                });
+            //get list ingredients
+            //get 4 unique cocktqails
+            //get correct answer
         }
 
         function GetGuessIngredientData() {
-            $('#question').empty();
-            $('<h4>', { text: 'GI' }).appendTo($('#question'));
         }
 
-        function GetGuessOriginData() {
+        function GetGuessOriginData() { 
+        }
+
+        function ClearAll() {
             $('#question').empty();
-            $('<h4>', { text: 'GO' }).appendTo($('#question'));
+            $('#ingredients').empty();
+            $('#cocktail').empty();
+            $('#question').empty();
         }
     </script>
 }

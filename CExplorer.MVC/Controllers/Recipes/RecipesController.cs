@@ -7,7 +7,7 @@ namespace CExplorer.MVC.Controllers.Recipes
 {
     public class RecipesController : Controller
     {
-        readonly string baseuri = "https://localhost:44385/api/Recipes";
+        readonly string baseuri = "https://localhost:44385/api/Cocktails";
         public IActionResult Index()
         {
             string uri = $"{baseuri}/basic";

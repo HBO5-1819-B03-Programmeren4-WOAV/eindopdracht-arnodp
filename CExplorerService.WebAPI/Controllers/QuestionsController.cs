@@ -7,17 +7,16 @@ namespace CExplorerService.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuizController : ControllerCrudBase<QuestionBase, QuestionRepository>
+    public class QuestionsController : ControllerCrudBase<QuestionBase, QuestionRepository>
     {
-        public QuizController(QuestionRepository questionRepository) : base(questionRepository)
+        public QuestionsController(QuestionRepository questionRepository) : base(questionRepository)
         { }
 
         [HttpGet]
         [Route("random")]
         public async Task<IActionResult> GetRandomQuestion()
         {
-            return Ok(await repository.GetRandomQuestion());
+          return Ok( await repository.GetRandomQuestion());
         }
-
     }
 }

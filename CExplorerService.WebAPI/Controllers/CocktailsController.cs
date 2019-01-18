@@ -7,9 +7,9 @@ namespace CExplorerService.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecipesController : ControllerCrudBase<Cocktail,CocktailRepository>
+    public class CocktailsController : ControllerCrudBase<Cocktail,CocktailRepository>
     {
-        public RecipesController(CocktailRepository cocktailRepository): base(cocktailRepository)
+        public CocktailsController(CocktailRepository cocktailRepository): base(cocktailRepository)
         {
         }
 
@@ -24,6 +24,20 @@ namespace CExplorerService.WebAPI.Controllers
         public async Task<IActionResult> GetCocktailBasic()
         {
             return Ok(await repository.ListBasic());
+        }
+
+        [HttpGet]
+        [Route("random")]
+        public async Task<IActionResult> GetRndCocktailWithIngredients()
+        {
+            return Ok(await repository.GetRndWithIngredients());
+        }
+
+        [HttpGet]
+        [Route("randomlist/{id}")]
+        public async Task<IActionResult> GetRndCocktailBasicList(int Id)
+        {
+            return Ok(await repository.GetRndBasicList(Id));
         }
     }
 }

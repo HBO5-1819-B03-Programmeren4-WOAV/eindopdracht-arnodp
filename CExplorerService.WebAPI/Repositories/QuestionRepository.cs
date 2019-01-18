@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CExplorerService.lib.Models;
+using CExplorerService.lib.DTO;
 using CExplorerService.WebAPI.Data;
 using CExplorerService.WebAPI.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
