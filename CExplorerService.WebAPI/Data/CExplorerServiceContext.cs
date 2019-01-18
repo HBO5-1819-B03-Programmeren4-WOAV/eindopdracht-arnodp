@@ -17,16 +17,15 @@ namespace CExplorerService.WebAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region commentary
 
-            modelBuilder.Entity<Origin>().ToTable("Origin").HasData(
+            modelBuilder.Entity<Origin>().ToTable("Origins").HasData(
                 new Origin { Country = "Brazil", Id = 1 },
                 new Origin { Country = "United States", Id = 2 },
                 new Origin { Country = "United Kingdom", Id = 3 },
                 new Origin { Country = "Peru", Id = 4 }
                 );
 
-            modelBuilder.Entity<Cocktail>().ToTable("Cocktail").HasData(
+            modelBuilder.Entity<Cocktail>().ToTable("Cocktails").HasData(
                 new Cocktail { Name = "Caipirinha", OriginId = 1, Id = 1 },
                 new Cocktail { Name = "Mai-Thai", OriginId = 2, Id = 2 },
                 new Cocktail { Name = "Long island ice tea", OriginId = 2, Id = 3 },
@@ -57,7 +56,7 @@ namespace CExplorerService.WebAPI.Data
                 new IngredientBase { Name = "Egg White", Id = 19 }
                 );
 
-            modelBuilder.Entity<Ingredient>().ToTable("Ingredient").HasData(
+            modelBuilder.Entity<Ingredient>().ToTable("Ingredients").HasData(
                 new Ingredient { CocktailId = 1, Id = 1, IngredientBaseId = 1, Volume = 5, Dosage = "cl" },
                 new Ingredient { CocktailId = 1, Id = 2, IngredientBaseId = 2, Volume = .5, Dosage = "cut into 4 wedges" },
                 new Ingredient { CocktailId = 1, Id = 3, IngredientBaseId = 3, Volume = 2, Dosage = "teaspoons" },
@@ -87,7 +86,13 @@ namespace CExplorerService.WebAPI.Data
                 new Ingredient { CocktailId = 5, Id = 23, IngredientBaseId = 16, Volume = 2, Dosage = "cl" },
                 new Ingredient { CocktailId = 5, Id = 24, IngredientBaseId = 19, Volume = 1, Dosage = "" }
                 );
-            #endregion
+
+            modelBuilder.Entity<QuestionBase>().ToTable("Questions").HasData(
+                new QuestionBase { Id = 1, Question = "Wich cocktail can you make with these ingredients ?", Partial = "GuessCocktail" },
+                new QuestionBase { Id = 2, Question = "Wich ingredient is missing ?", Partial = "GuessIngredient" },
+                new QuestionBase { Id = 3, Question = "What is the origin of this cocktail ?", Partial = "GuessOrigin" }
+                );
+
             base.OnModelCreating(modelBuilder);
         }
     }

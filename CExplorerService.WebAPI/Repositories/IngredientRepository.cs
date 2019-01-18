@@ -5,7 +5,6 @@ using CExplorerService.lib.Models;
 using CExplorerService.WebAPI.Data;
 using CExplorerService.WebAPI.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,16 +23,10 @@ namespace CExplorerService.WebAPI.Repositories
         }
         public async Task<List<IngredientBasic>> GetIngredientsBasic(int id)
         {
-            var test = await db.Ingredients
+            return await db.Ingredients
                 .Where(i => i.CocktailId == id)
                 .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider)
                 .ToListAsync();
-
-            return test;
-
-            //return mapper.Map<IngredientBasic>(
-            //    await db.Ingredients
-            //    .FirstOrDefaultAsync(i => i.CocktailId == id));
         }
     }
 }

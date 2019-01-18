@@ -37,6 +37,7 @@ namespace CExplorerService.WebAPI
 
             services.AddScoped<CocktailRepository>();
             services.AddScoped<IngredientRepository>();
+            services.AddScoped<QuestionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,12 +46,6 @@ namespace CExplorerService.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
-                //    .CreateScope())
-                //{
-                //    var context = serviceScope.ServiceProvider.GetService<CExplorerServiceContext>(); //get DbContext 
-                //    //Seeder.Seed(context);
-                //}
             }
             else
             {

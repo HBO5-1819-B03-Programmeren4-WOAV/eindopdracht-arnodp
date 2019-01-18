@@ -1,0 +1,71 @@
+﻿@using CExplorerService.lib.Models
+@model QuestionBase
+
+<div>
+    <h3 class="col-md-12">Cocktail Explorer Quiz</h3>
+
+    <div id="question" class="col-md-12"></div>
+
+    <div id="cocktail" class="col-md-12"></div>
+
+    <div class="col-md-12">
+        <ul id="ingredients" class="list-group IngredientList"></ul>
+    </div>
+
+
+    <div class="col-md-12">
+        <button class="nextbtn">Next</button>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+        var url = 'https://localhost:44385/api/Quiz/random';
+
+        $(document).ready(function () {
+            $.getJSON(url)
+                .done(function (data) {
+                    GetQuestionData(data)
+                });
+        });
+
+        $(document).ready(function () {
+            $(".nextbtn").on('click', function () {
+                $.getJSON(url)
+                    .done(function (data) {
+                        GetQuestionData(data)
+                    });
+            });
+        });
+
+        function GetQuestionData(data) {
+            if (data.partial == "GuessCocktail") {
+                GetGuessCocktailData();
+            }
+            else if (data.partial == "GuessIngredient") {
+                GetGuessIngredientData();
+            }
+            else if (data.partial == "GuessOrigin") {
+                GetGuessOriginData();
+            }
+        }
+
+        function GetGuessCocktailData() {
+            $('#question').empty();
+            $('<h4>', { text: 'GC' }).appendTo($('#question'));
+        }
+
+        function GetGuessIngredientData() {
+            $('#question').empty();
+            $('<h4>', { text: 'GI' }).appendTo($('#question'));
+        }
+
+        function GetGuessOriginData() {
+            $('#question').empty();
+            $('<h4>', { text: 'GO' }).appendTo($('#question'));
+        }
+    </script>
+}
+
