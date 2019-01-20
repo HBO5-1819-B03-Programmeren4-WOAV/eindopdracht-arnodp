@@ -1,5 +1,4 @@
-﻿@using CExplorerService.lib.Models
-@model QuestionBase
+﻿
 
 <div>
     <h3 class="col-md-12">Cocktail Explorer Quiz</h3>
@@ -8,23 +7,24 @@
 
     <div id="cocktail" class="col-md-12"></div>
 
-    <div class="col-md-12">
+    <div class="col-md-6">
         <ul id="ingredients" class="list-group IngredientList"></ul>
     </div>
 
-
-
-
-    <div class="col-md-12">
-        <button class="nextbtn">Next</button>
+    <div class="col-md-6">
+        <div id="answer1" class="answers"></div>
+        <div id="answer2" class="answers"></div>
+        <div id="answer3" class="answers"></div>
+        <div id="answer4" class="answers"></div>
     </div>
 </div>
 
-
 @section scripts
-{
+    {
     <script>
         var url = 'https://localhost:44385/api/Questions/random';
+        var correctanswer = 'none';
+        var score = 0;
 
         $(document).ready(function () {
             $.getJSON(url)
@@ -34,7 +34,9 @@
         });
 
         $(document).ready(function () {
-            $(".nextbtn").on('click', function () {
+            $(".answers").on('click', function (data) {
+                if (data.currentTarget.innerText == correctanswer)
+                    score = score + 1;
                 $.getJSON(url)
                     .done(function (data) {
                         ClearAll()
@@ -42,6 +44,7 @@
                     });
             });
         });
+
 
         function GetQuestionData(data) {
             if (data.partial == "GuessCocktail") {
@@ -55,38 +58,65 @@
             }
             $('<h4>', { text: data.question }).appendTo($('#question'));
         }
-        
-        var Curl = 'https://localhost:44385/api/Cocktails';
-        var Iurl = 'https://localhost:44385/api/Ingredients';
+
+        var irl = 'https://localhost:44385/api/Questions';
 
         function GetGuessCocktailData() {
-            fetch(Curl + '/random')
+            fetch(irl + '/guesscocktail')
                 .then(responds => responds.json())
                 .then(function (data) {
-                    //save correct answer here, + set list ingred 
-                    fetch(Curl + '/randomlist' + data('id'))
-                        .then(responds => responds.json())
-                        .then(function (data) {
-                            //set answers here
-                        });
-                });
-            //get list ingredients
-            //get 4 unique cocktqails
-            //get correct answer
-        }
+                    correctanswer = data.cocktailWithIngredients.name;
+                    SetIngredients(data)
+                    SetAnswers(data)
+                })
+        };
 
         function GetGuessIngredientData() {
         }
 
-        function GetGuessOriginData() { 
+        function GetGuessOriginData() {
         }
 
         function ClearAll() {
             $('#question').empty();
             $('#ingredients').empty();
             $('#cocktail').empty();
-            $('#question').empty();
+            $('#answers').empty();
+            $('#answer1').empty();
+            $('#answer2').empty();
+            $('#answer3').empty();
+            $('#answer4').empty();
         }
+
+        function formatItem(item) {
+            return item.name + ' ' + item.volume + ' ' + item.dosage;
+        }
+
+        function SetCocktail(data) {
+            $('<h5>', { text: data.cocktailWithIngredients.name }).appendTo($('#cocktail'));
+        }
+
+        function SetIngredients(data) {
+            $.each(data.cocktailWithIngredients.ingredients, function (key, item) {
+                $('<li>', { text: formatItem(item) })
+                    .appendTo($('#ingredients'));
+            })
+        }
+
+        function SetAnswers(data) {
+            $('<button>', { text: data.answer1 })
+                .appendTo($('#answer1'));
+
+            $('<button>', { text: data.answer2 })
+                .appendTo($('#answer2'));
+
+            $('<button>', { text: data.answer3 })
+                .appendTo($('#answer3'));
+
+            $('<button>', { text: data.answer4 })
+                .appendTo($('#answer4'));
+        }
+
     </script>
 }
 

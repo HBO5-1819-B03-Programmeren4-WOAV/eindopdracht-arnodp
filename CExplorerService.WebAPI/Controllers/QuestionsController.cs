@@ -18,5 +18,30 @@ namespace CExplorerService.WebAPI.Controllers
         {
           return Ok( await repository.GetRandomQuestion());
         }
+
+        //use partial in cshtml to make route ? remove if else struct
+
+        [HttpGet]
+        [Route("guesscocktail")]
+        public async Task<IActionResult> GetGuessCocktailData()
+        {
+            return Ok(await repository.GetGuessCocktailData());
+        }
+
+        [HttpGet]
+        [Route("guessingredients")]
+        public async Task<IActionResult> GetGuessIngredientsData()
+        {
+            //todo repo method
+            return Ok(await repository.GetGuessCocktailData());
+        }
+
+        [HttpGet]
+        [Route("guessorigin")]
+        public async Task<IActionResult> GetGuessOriginData()
+        {
+            //todo repo method
+            return Ok(await repository.GetGuessCocktailData());
+        }
     }
 }

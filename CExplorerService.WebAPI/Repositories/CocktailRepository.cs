@@ -57,7 +57,7 @@ namespace CExplorerService.WebAPI.Repositories
                      .Where(c => c.Id == rndint).ProjectTo<CocktailBasic>(mapper.ConfigurationProvider)
                      .FirstOrDefaultAsync();
 
-                if (newcocktail != correctanswer)
+                if (newcocktail.Name != correctanswer.Name)
                     cocktailBasics.Add(newcocktail);
 
                 rndint = rnd.Next(1, (db.Cocktails.Count() + 1));
