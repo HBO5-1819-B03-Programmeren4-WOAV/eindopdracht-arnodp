@@ -1,17 +1,19 @@
 ﻿
 
-<div>
+<div style="margin:10px;">
     <h3 class="col-md-12">Cocktail Explorer Quiz</h3>
 
-    <div id="question" class="col-md-12"></div>
+    <div id="question" class="col-md-8"></div>
 
-    <div id="cocktail" class="col-md-12"></div>
+    <div class="col-md-2" id="score"></div>
 
-    <div class="col-md-6">
+    <div id="cocktail" class="col-md-12" style="display:table-row-group; border-bottom:solid 1px white; margin-bottom:5px;"></div>
+
+    <div class="col-md-4">
         <ul id="ingredients" class="list-group IngredientList"></ul>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-sm-3">
         <div id="answer1" class="answers"></div>
         <div id="answer2" class="answers"></div>
         <div id="answer3" class="answers"></div>
@@ -56,6 +58,7 @@
             else if (data.partial == "GuessOrigin") {
                 GetGuessOriginData();
             }
+            $('<p>', { text:'Score : '+ score.toString() }).appendTo($('#score'));
             $('<h4>', { text: data.question }).appendTo($('#question'));
         }
 
@@ -65,16 +68,31 @@
             fetch(irl + '/guesscocktail')
                 .then(responds => responds.json())
                 .then(function (data) {
-                    correctanswer = data.cocktailWithIngredients.name;
+                    correctanswer = data.cocktail.name;
                     SetIngredients(data)
                     SetAnswers(data)
                 })
         };
 
         function GetGuessIngredientData() {
-        }
-
+            fetch(irl + '/guessingredient')
+                .then(responds => responds.json())
+                .then(function (data) {
+                    correctanswer = data.correctanswer;
+                    SetCocktail(data)
+                    SetIngredients(data)
+                    SetAnswers(data)
+                })
+        };
+        
         function GetGuessOriginData() {
+            fetch(irl + '/guessorigin')
+                .then(responds => responds.json())
+                .then(function (data) {
+                    correctanswer = data.cocktail.origin;
+                    SetCocktail(data)
+                    SetAnswers(data)
+                })
         }
 
         function ClearAll() {
@@ -86,6 +104,7 @@
             $('#answer2').empty();
             $('#answer3').empty();
             $('#answer4').empty();
+            $('#score').empty();
         }
 
         function formatItem(item) {
@@ -93,17 +112,19 @@
         }
 
         function SetCocktail(data) {
-            $('<h5>', { text: data.cocktailWithIngredients.name }).appendTo($('#cocktail'));
+            $('<h4>', { text:'Cocktail : '+ data.cocktail.name }).appendTo($('#cocktail'));
         }
 
         function SetIngredients(data) {
-            $.each(data.cocktailWithIngredients.ingredients, function (key, item) {
+            $.each(data.cocktail.ingredients, function (key, item) {
+                debugger;
                 $('<li>', { text: formatItem(item) })
                     .appendTo($('#ingredients'));
             })
         }
 
         function SetAnswers(data) {
+            debugger;
             $('<button>', { text: data.answer1 })
                 .appendTo($('#answer1'));
 

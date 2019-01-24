@@ -29,19 +29,17 @@ namespace CExplorerService.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("guessingredients")]
+        [Route("guessingredient")]
         public async Task<IActionResult> GetGuessIngredientsData()
         {
-            //todo repo method
-            return Ok(await repository.GetGuessCocktailData());
+            return Ok(await repository.GetGuessIngredientData());
         }
 
         [HttpGet]
         [Route("guessorigin")]
         public async Task<IActionResult> GetGuessOriginData()
         {
-            //todo repo method
-            return Ok(await repository.GetGuessCocktailData());
+            return Ok(await repository.GetGuessOriginData());
         }
     }
 }

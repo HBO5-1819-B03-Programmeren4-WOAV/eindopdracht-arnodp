@@ -27,15 +27,15 @@ namespace CExplorerService.WebAPI.Repositories
                 .Where(q => q.Id == rndId).FirstOrDefaultAsync();
         }
 
-        public async Task<QuestionData> GetGuessCocktailData()
+        public async Task<GuessCocktailData> GetGuessCocktailData()
         {
-            QuestionData questionData = new QuestionData();
+            GuessCocktailData questionData = new GuessCocktailData();
             Random rnd = new Random();
 
             //get random a random cocktail.
             int rndId = rnd.Next(1, (db.Cocktails.Count() + 1));
 
-            var cocktailWithIngredients = await db.Cocktails.Where(c => c.Id == rndId)
+            var cocktail = await db.Cocktails.Where(c => c.Id == rndId)
                 .Include(c => c.Ingredients)
                 .ProjectTo<CocktailWithIngredients>(mapper.ConfigurationProvider).FirstOrDefaultAsync();
 
@@ -44,18 +44,121 @@ namespace CExplorerService.WebAPI.Repositories
             while (ids.Count != 3)
             {
                 rndId = rnd.Next(1, (db.Cocktails.Count() + 1));
-                if (rndId != cocktailWithIngredients.Id)//rndId cannot be equile to the correct cocktail Id
+                if (rndId != cocktail.Id)//rndId cannot be equile to the correct cocktail Id
                     ids.Add(rndId);
             }
             rndId = rnd.Next(0,3);
-            ids.Insert(rndId, cocktailWithIngredients.Id);//add correct cocktail id in random position
+            ids.Insert(rndId, cocktail.Id);//add correct cocktail id in random position
 
             questionData.Answer1 = db.Cocktails.Where(c => c.Id == ids[0]).FirstOrDefaultAsync().Result.Name;
             questionData.Answer2 = db.Cocktails.Where(c => c.Id == ids[1]).FirstOrDefaultAsync().Result.Name;
             questionData.Answer3 = db.Cocktails.Where(c => c.Id == ids[2]).FirstOrDefaultAsync().Result.Name;
             questionData.Answer4 = db.Cocktails.Where(c => c.Id == ids[3]).FirstOrDefaultAsync().Result.Name;
 
-            questionData.cocktailWithIngredients = cocktailWithIngredients;
+            questionData.cocktail = cocktail;
+
+            return questionData;
+        }
+
+        public async Task<GuessIngredientData> GetGuessIngredientData()
+        {
+            GuessIngredientData questionData = new GuessIngredientData();
+            Random rnd = new Random();
+
+            //get random a random cocktail.
+            int rndId = rnd.Next(1, (db.Cocktails.Count() + 1));
+
+            var cocktail = await db.Cocktails.Where(c => c.Id == rndId)
+                .Include(c => c.Ingredients)
+            .ProjectTo<CocktailWithIngredients>(mapper.ConfigurationProvider).FirstOrDefaultAsync();
+
+            //get list of ingredients for cocktail
+            var ingredients = cocktail.Ingredients;
+            
+            //get random ingredient as correct answer.
+            rndId = rnd.Next(1, (ingredients.Count()));
+            var correctanswer = ingredients.ElementAt(rndId);
+            
+            //remove correct answer from list. (this list is going to be displayed )
+            ingredients.Remove(correctanswer);
+            
+            //add list to cocktail
+            cocktail.Ingredients = ingredients;
+            
+            //add necessary data to questiondata
+            questionData.cocktail = cocktail;
+            questionData.correctanswer = correctanswer.name;
+
+            //insert correct answer in random position
+            var CA = await db.Ingredients.Include(i => i.IngredientBase)
+                .Where(i => i.IngredientBase.Name == correctanswer.name).FirstOrDefaultAsync();
+
+            //generate 3 random ingredients
+            List<int> ids = new List<int>();
+            while (ids.Count != 3)
+            {
+                rndId = rnd.Next(1, (db.Ingredients.Count() + 1));
+                var random = await db.Ingredients.Where(i => i.Id == rndId).FirstOrDefaultAsync();
+
+                if(random.CocktailId != CA.Id)
+                    ids.Add(rndId);
+            }
+
+            //insert correct answer id into random postion
+            rndId = rnd.Next(0, 3);
+            ids.Insert(rndId, CA.Id);
+            
+            //set answers
+            questionData.Answer1 = db.Ingredients.Where(i => i.Id == ids[0]).Include(i => i.IngredientBase)
+                                .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider).FirstOrDefaultAsync().Result.name;
+
+            questionData.Answer2 = db.Ingredients.Where(i => i.Id == ids[1]).Include(i => i.IngredientBase)
+                                .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider).FirstOrDefaultAsync().Result.name;
+
+            questionData.Answer3 = db.Ingredients.Where(i => i.Id == ids[2]).Include(i => i.IngredientBase)
+                                .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider).FirstOrDefaultAsync().Result.name;
+
+            questionData.Answer4 = db.Ingredients.Where(i => i.Id == ids[3]).Include(i => i.IngredientBase)
+                                .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider).FirstOrDefaultAsync().Result.name;
+
+            return questionData;
+        }
+
+        public async Task<GuessOriginData> GetGuessOriginData()
+        {
+            GuessOriginData questionData = new GuessOriginData();
+            Random rnd = new Random();
+
+            //get random a random cocktail.
+            int rndId = rnd.Next(1, (db.Cocktails.Count() + 1));
+
+            var cocktail = await db.Cocktails.Where(c => c.Id == rndId)
+                .Include(c => c.Origin)
+            .ProjectTo<CocktailWithOrigin>(mapper.ConfigurationProvider).FirstOrDefaultAsync();
+            
+            //get random origin ids
+            List<int> ids = new List<int>();
+            while (ids.Count != 3)
+            {
+                rndId = rnd.Next(1, (db.Origins.Count()));
+                var rndOrigin = await db.Origins.Where(o => o.Id == rndId).FirstOrDefaultAsync();
+
+                if (rndOrigin.Country != cocktail.Origin)
+                    ids.Add(rndId);
+            }
+            
+            //get id correct origin and insert into ids list
+            var CO = await db.Origins.Where(o => o.Country == cocktail.Origin).FirstOrDefaultAsync();
+            rndId = rnd.Next(0, 3);
+            ids.Insert(rndId, CO.Id);
+            
+            //set questiondata
+            questionData.cocktail = cocktail;
+
+            questionData.Answer1 = db.Origins.Where(o => o.Id == ids[0]).FirstOrDefaultAsync().Result.Country;
+            questionData.Answer2 = db.Origins.Where(o => o.Id == ids[1]).FirstOrDefaultAsync().Result.Country;
+            questionData.Answer3 = db.Origins.Where(o => o.Id == ids[2]).FirstOrDefaultAsync().Result.Country;
+            questionData.Answer4 = db.Origins.Where(o => o.Id == ids[3]).FirstOrDefaultAsync().Result.Country;
 
             return questionData;
         }

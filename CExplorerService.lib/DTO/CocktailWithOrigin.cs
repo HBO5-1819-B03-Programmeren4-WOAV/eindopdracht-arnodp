@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace CExplorerService.lib.DTO
 {
     public class CocktailWithOrigin

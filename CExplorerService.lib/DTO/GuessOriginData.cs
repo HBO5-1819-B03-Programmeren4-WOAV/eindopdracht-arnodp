@@ -1,10 +1,9 @@
 ﻿
 namespace CExplorerService.lib.DTO
 {
-    public class QuestionData
+    public class GuessOriginData
     {
-        //TODO: make compatable with all questions needs
-        public CocktailWithIngredients cocktailWithIngredients { get; set;}
+        public CocktailWithOrigin cocktail {get; set;}
 
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }
