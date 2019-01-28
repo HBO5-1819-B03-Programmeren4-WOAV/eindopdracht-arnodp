@@ -1,2 +1,19 @@
 ﻿
 <h1>Admin Index</h1>
+<article  id="app" class="row">
+    <header class="col-md-12">
+        <h3>{{message}}</h3>
+        <nav>
+            <ul class="list-group">
+                <li v-for="cocktail in cocktails" v-on:click="fetchCocktail(cocktail)" :class="getCocktailClass(cocktail)" style="cursor:pointer">
+                    <span class="cocktailTitle">{{ cocktail.name}}</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</article>
+
+@section scripts{
+    <script src="~/js/vue.js"></script>
+    <script src="~/js/Admin.js"></script>
+}
