@@ -1,6 +1,6 @@
 ﻿
 
-<div style="margin:10px;">
+<div style="margin:5px;">
     <h3 class="col-md-12">Cocktail Explorer Quiz</h3>
 
     <div id="question" class="col-md-8"></div>
@@ -46,7 +46,6 @@
                     });
             });
         });
-
 
         function GetQuestionData(data) {
             if (data.partial == "GuessCocktail") {
@@ -95,22 +94,6 @@
                 })
         }
 
-        function ClearAll() {
-            $('#question').empty();
-            $('#ingredients').empty();
-            $('#cocktail').empty();
-            $('#answers').empty();
-            $('#answer1').empty();
-            $('#answer2').empty();
-            $('#answer3').empty();
-            $('#answer4').empty();
-            $('#score').empty();
-        }
-
-        function formatItem(item) {
-            return item.name + ' ' + item.volume + ' ' + item.dosage;
-        }
-
         function SetCocktail(data) {
             $('<h4>', { text:'Cocktail : '+ data.cocktail.name }).appendTo($('#cocktail'));
         }
@@ -138,6 +121,21 @@
                 .appendTo($('#answer4'));
         }
 
+        function ClearAll() {
+            $('#question').empty();
+            $('#ingredients').empty();
+            $('#cocktail').empty();
+            $('#answers').empty();
+            $('#answer1').empty();
+            $('#answer2').empty();
+            $('#answer3').empty();
+            $('#answer4').empty();
+            $('#score').empty();
+        }
+
+        function formatItem(item) {
+            return item.name + ' ' + item.volume + ' ' + item.dosage;
+        }
     </script>
 }
 
