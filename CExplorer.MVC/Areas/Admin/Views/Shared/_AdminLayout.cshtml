@@ -2,10 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Cocktail Explorer</title>
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -17,7 +17,7 @@
 </head>
 <body>
     <!--NavBar-->
-    <nav class="navbar navbar-inverse CENavBar">
+    <nav class=" navbar-inverse CENavBar col-md-12">
         <div class="container">
             <div>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -40,8 +40,8 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
-        <div style="margin-top:70px;">
+    <div class="container">
+        <div style="margin-top:150px;">
             @RenderBody()
         </div>
     </div>

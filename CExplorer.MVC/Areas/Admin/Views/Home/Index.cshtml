@@ -1,17 +1,56 @@
-﻿
-<h1>Admin Index</h1>
-<article  id="app" class="row">
-    <header class="col-md-12">
-        <h3>{{message}}</h3>
-        <nav>
-            <ul class="list-group">
-                <li v-for="cocktail in cocktails" v-on:click="fetchCocktail(cocktail)" :class="getCocktailClass(cocktail)" style="cursor:pointer">
-                    <span class="cocktailTitle">{{ cocktail.name}}</span>
-                </li>
-            </ul>
-        </nav>
-    </header>
-</article>
+﻿<div id="app">
+   <article class="col-md-3">
+       <h3>{{message}}</h3>
+       <nav>
+           <ul class="list-group">
+               <li v-for="cocktail in cocktails" v-on:click="fetchCocktailDetails(cocktail)" style="cursor:pointer">
+                   <span class="bookTitle">{{ cocktail.id }}</span>
+                   <span class="bookTitle">{{ cocktail.name }}</span>
+               </li>
+           </ul>
+       </nav>
+   </article>
+
+    <div v-if="currentCocktail" class="col-md-6">
+        <h3>Details</h3>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" v-model="currentCocktail.name"/>
+                </div>
+
+                <label class="col-sm-2 control-label">Origin</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" v-model="currentCocktail.origin" />
+                </div>
+            </div>
+        </div>
+        <h3>Ingredients</h3>
+        <div class="form-group">
+            <div class="col-md-12">
+                <label class="col-sm-4">name</label>
+                <label class="col-sm-4">volume</label>
+                <label class="col-sm-4">dosage</label>
+            </div>
+            <div class="col-md-12">
+                <div v-for="ingredient in currentCocktail.ingredients">
+                    <input :value="ingredient.name" />
+                    <input :value="ingredient.volume" />
+                    <input :value="ingredient.dosage" />
+                </div>
+                <div v-if="CanAddIngredient">
+                    <input v-model="NewIngredient.name" placeholder="name" />
+                    <input v-model="NewIngredient.volume" placeholder="ex. 2.5 or 5" />
+                    <input v-model="NewIngredient.dosage" placeholder="ex. cl or teaspoon" />
+                </div>
+                <div>
+                    <button class="btn btn-primary" v-on:click="addIngredient">{{addBtn_Text}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts{
     <script src="~/js/vue.js"></script>

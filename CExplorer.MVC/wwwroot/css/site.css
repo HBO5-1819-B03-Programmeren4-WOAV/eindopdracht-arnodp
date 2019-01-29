@@ -50,6 +50,7 @@ body {
 }
 .CENavBar {
     position: absolute;
+    left:0px;
     margin: 0 auto;
     width: 100%;
     border-radius: 0px;
@@ -71,6 +72,11 @@ body {
 
 
 .container {
+    letter-spacing: 1px;
+}
+
+.container-admin {
+    margin-left: 25px;
     letter-spacing: 1px;
 }
 

@@ -18,6 +18,12 @@ namespace CExplorerService.WebAPI.Services.AutoMapper
             CreateMap<Cocktail, CocktailWithOrigin>()
                 .ForMember(dest => dest.Origin,
                 opts => opts.MapFrom(scr => scr.Origin.Country));
+
+            CreateMap<Cocktail, CocktailDetailed>()
+                .ForMember(dest => dest.origin,
+                opts => opts.MapFrom(src => src.Origin.Country))
+                .ForMember(dest => dest.Ingredients,
+                opts => opts.MapFrom(src => src.Ingredients));
         }
     }
 }

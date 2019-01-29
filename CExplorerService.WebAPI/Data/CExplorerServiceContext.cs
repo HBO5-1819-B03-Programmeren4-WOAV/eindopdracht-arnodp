@@ -17,7 +17,6 @@ namespace CExplorerService.WebAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Origin>().ToTable("Origins").HasData(
                 new Origin { Country = "Brazil", Id = 1 },
                 new Origin { Country = "United States", Id = 2 },

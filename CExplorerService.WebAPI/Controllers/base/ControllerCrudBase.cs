@@ -31,7 +31,7 @@ namespace CExplorerService.WebAPI.Controllers
 
         // PUT
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] T entity)
+        public virtual async Task<IActionResult> Put([FromRoute] int id, [FromBody] T entity)
         {
             if (!ModelState.IsValid)
             {

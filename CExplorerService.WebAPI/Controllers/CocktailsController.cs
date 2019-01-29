@@ -39,5 +39,29 @@ namespace CExplorerService.WebAPI.Controllers
         {
             return Ok(await repository.GetRndBasicList(Id));
         }
+
+        [HttpGet]
+        [Route("detailed/{id}")]
+        public async Task<IActionResult> GetDetailedCocktail (int id)
+        {
+            var test = await repository.GetDetailed(id);
+            return Ok(test);
+        }
+
+        [HttpPut]
+        [Route("test/{id}")]
+        public async Task<IActionResult> Put([FromBody] Cocktail cocktail)
+        {
+            int x = 0;
+            return await base.Post(cocktail);
+        }
+
+        [HttpPost]
+        public async override Task<IActionResult> Post([FromBody] Cocktail cocktail )
+        {
+
+            return await base.Post(cocktail);
+        }
+
     }
 }
