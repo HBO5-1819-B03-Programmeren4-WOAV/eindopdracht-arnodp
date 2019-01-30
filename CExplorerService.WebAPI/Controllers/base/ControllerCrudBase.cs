@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CExplorerService.lib.Models.Base;
 using CExplorerService.WebAPI.Repositories.Base;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +45,7 @@ namespace CExplorerService.WebAPI.Controllers
             }
 
             T e = await repository.Update(entity);
+
             if (e == null)
             {
                 return NotFound();

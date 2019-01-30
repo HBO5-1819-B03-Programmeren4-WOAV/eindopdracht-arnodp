@@ -26,19 +26,19 @@ namespace CExplorerService.WebAPI.Controllers
             return Ok(await repository.ListBasic());
         }
 
-        [HttpGet]
-        [Route("random")]
-        public async Task<IActionResult> GetRndCocktailWithIngredients()
-        {
-            return Ok(await repository.GetRndWithIngredients());
-        }
+        //[HttpGet]
+        //[Route("random")]
+        //public async Task<IActionResult> GetRndCocktailWithIngredients()
+        //{
+        //    return Ok(await repository.GetRndWithIngredients());
+        //}
 
-        [HttpGet]
-        [Route("randomlist/{id}")]
-        public async Task<IActionResult> GetRndCocktailBasicList(int Id)
-        {
-            return Ok(await repository.GetRndBasicList(Id));
-        }
+        //[HttpGet]
+        //[Route("randomlist/{id}")]
+        //public async Task<IActionResult> GetRndCocktailBasicList(int Id)
+        //{
+        //    return Ok(await repository.GetRndBasicList(Id));
+        //}
 
         [HttpGet]
         [Route("detailed/{id}")]
@@ -49,19 +49,18 @@ namespace CExplorerService.WebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("test/{id}")]
-        public async Task<IActionResult> Put([FromBody] Cocktail cocktail)
+        [Route("{id}")]
+        public async Task Put([FromBody] Cocktail cocktail)
         {
-            int x = 0;
-            return await base.Post(cocktail);
+             await repository.updateCocktail(cocktail);
         }
 
-        [HttpPost]
-        public async override Task<IActionResult> Post([FromBody] Cocktail cocktail )
-        {
+        //[HttpPost]
+        //public async override Task<IActionResult> Post([FromBody] Cocktail cocktail )
+        //{
 
-            return await base.Post(cocktail);
-        }
+        //    return await repository.Update(cocktail)
+        //}
 
     }
 }

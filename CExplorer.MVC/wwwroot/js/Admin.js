@@ -57,7 +57,7 @@ var app = new Vue({
             }
             else {
                 debugger;
-                this.currentCocktail.ingredients.push({name : this.NewIngredient.name, volume : this.NewIngredient.volume, dosage : this.NewIngredient.dosage,})
+                this.currentCocktail.ingredients.push({ volume: this.NewIngredient.volume, dosage: this.NewIngredient.dosage, cocktailId: this.currentCocktail.id,cocktail: null ,ingredientBase: {name: this.NewIngredient.name}});
                 this.SaveCocktail();
                 debugger;
                 this.CanAddIngredient = false;
@@ -68,7 +68,6 @@ var app = new Vue({
         },
 
         SaveCocktail: function () {
-            debugger;
             var ajaxHeaders = new Headers();
             ajaxHeaders.append("Content-Type", "application/json");
             var ajaxConfig = {

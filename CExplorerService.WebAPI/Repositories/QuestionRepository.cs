@@ -89,7 +89,7 @@ namespace CExplorerService.WebAPI.Repositories
             questionData.cocktail = cocktail;
             questionData.correctanswer = correctanswer.name;
 
-            //insert correct answer in random position
+            //
             var CA = await db.Ingredients.Include(i => i.IngredientBase)
                 .Where(i => i.IngredientBase.Name == correctanswer.name).FirstOrDefaultAsync();
 
@@ -100,7 +100,7 @@ namespace CExplorerService.WebAPI.Repositories
                 rndId = rnd.Next(1, (db.Ingredients.Count() + 1));
                 var random = await db.Ingredients.Where(i => i.Id == rndId).FirstOrDefaultAsync();
 
-                if(random.CocktailId != CA.Id)
+                if(random.Id != CA.Id)
                     ids.Add(rndId);
             }
 

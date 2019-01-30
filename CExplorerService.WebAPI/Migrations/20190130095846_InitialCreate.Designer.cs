@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CExplorerService.WebAPI.Migrations
 {
     [DbContext(typeof(CExplorerServiceContext))]
-    [Migration("20190108154742_update")]
-    partial class update
+    [Migration("20190130095846_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace CExplorerService.WebAPI.Migrations
 
                     b.HasIndex("OriginId");
 
-                    b.ToTable("Cocktail");
+                    b.ToTable("Cocktails");
 
                     b.HasData(
                         new { Id = 1, Name = "Caipirinha", OriginId = 1 },
@@ -65,7 +65,7 @@ namespace CExplorerService.WebAPI.Migrations
 
                     b.HasIndex("IngredientBaseId");
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("Ingredients");
 
                     b.HasData(
                         new { Id = 1, CocktailId = 1, Dosage = "cl", IngredientBaseId = 1, Volume = 5.0 },
@@ -140,7 +140,7 @@ namespace CExplorerService.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Origin");
+                    b.ToTable("Origins");
 
                     b.HasData(
                         new { Id = 1, Country = "Brazil" },
@@ -156,11 +156,19 @@ namespace CExplorerService.WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Partial");
+
                     b.Property<string>("Question");
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionBases");
+                    b.ToTable("Questions");
+
+                    b.HasData(
+                        new { Id = 1, Partial = "GuessCocktail", Question = "Wich cocktail can you make with these ingredients ?" },
+                        new { Id = 2, Partial = "GuessIngredient", Question = "Wich ingredient is missing ?" },
+                        new { Id = 3, Partial = "GuessOrigin", Question = "What is the origin of this cocktail ?" }
+                    );
                 });
 
             modelBuilder.Entity("CExplorerService.lib.Models.Cocktail", b =>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CExplorerService.WebAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,7 @@ namespace CExplorerService.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Origin",
+                name: "Origins",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -30,24 +30,25 @@ namespace CExplorerService.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Origin", x => x.Id);
+                    table.PrimaryKey("PK_Origins", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuestionBases",
+                name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Question = table.Column<string>(nullable: true)
+                    Question = table.Column<string>(nullable: true),
+                    Partial = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuestionBases", x => x.Id);
+                    table.PrimaryKey("PK_Questions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cocktail",
+                name: "Cocktails",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -57,17 +58,17 @@ namespace CExplorerService.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cocktail", x => x.Id);
+                    table.PrimaryKey("PK_Cocktails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cocktail_Origin_OriginId",
+                        name: "FK_Cocktails_Origins_OriginId",
                         column: x => x.OriginId,
-                        principalTable: "Origin",
+                        principalTable: "Origins",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ingredient",
+                name: "Ingredients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -79,15 +80,15 @@ namespace CExplorerService.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ingredient", x => x.Id);
+                    table.PrimaryKey("PK_Ingredients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ingredient_Cocktail_CocktailId",
+                        name: "FK_Ingredients_Cocktails_CocktailId",
                         column: x => x.CocktailId,
-                        principalTable: "Cocktail",
+                        principalTable: "Cocktails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Ingredient_IngredientBase_IngredientBaseId",
+                        name: "FK_Ingredients_IngredientBase_IngredientBaseId",
                         column: x => x.IngredientBaseId,
                         principalTable: "IngredientBase",
                         principalColumn: "Id",
@@ -106,9 +107,9 @@ namespace CExplorerService.WebAPI.Migrations
                     { 16, "Sugar Syrup" },
                     { 15, "Coke" },
                     { 14, "Lemon Juice" },
-                    { 13, "Gin" },
-                    { 11, "Gomme Syrup" },
                     { 12, "Triple Sec" },
+                    { 11, "Gomme Syrup" },
+                    { 13, "Gin" },
                     { 9, "Tequila" },
                     { 8, "Lime Juice" },
                     { 7, "Orgeat Syrup" },
@@ -121,18 +122,28 @@ namespace CExplorerService.WebAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Origin",
+                table: "Origins",
                 columns: new[] { "Id", "Country" },
                 values: new object[,]
                 {
-                    { 3, "United Kingdom" },
                     { 1, "Brazil" },
                     { 2, "United States" },
+                    { 3, "United Kingdom" },
                     { 4, "Peru" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Cocktail",
+                table: "Questions",
+                columns: new[] { "Id", "Partial", "Question" },
+                values: new object[,]
+                {
+                    { 2, "GuessIngredient", "Wich ingredient is missing ?" },
+                    { 1, "GuessCocktail", "Wich cocktail can you make with these ingredients ?" },
+                    { 3, "GuessOrigin", "What is the origin of this cocktail ?" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cocktails",
                 columns: new[] { "Id", "Name", "OriginId" },
                 values: new object[,]
                 {
@@ -144,7 +155,7 @@ namespace CExplorerService.WebAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Ingredient",
+                table: "Ingredients",
                 columns: new[] { "Id", "CocktailId", "Dosage", "IngredientBaseId", "Volume" },
                 values: new object[,]
                 {
@@ -169,43 +180,43 @@ namespace CExplorerService.WebAPI.Migrations
                     { 5, 2, "cl", 5, 2.0 },
                     { 4, 2, "cl", 4, 4.0 },
                     { 3, 1, "teaspoons", 3, 2.0 },
-                    { 2, 1, "cut into 4 wedges", 2, 0.0 },
+                    { 2, 1, "cut into 4 wedges", 2, 0.5 },
                     { 23, 5, "cl", 16, 2.0 },
                     { 24, 5, "", 19, 1.0 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cocktail_OriginId",
-                table: "Cocktail",
+                name: "IX_Cocktails_OriginId",
+                table: "Cocktails",
                 column: "OriginId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingredient_CocktailId",
-                table: "Ingredient",
+                name: "IX_Ingredients_CocktailId",
+                table: "Ingredients",
                 column: "CocktailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingredient_IngredientBaseId",
-                table: "Ingredient",
+                name: "IX_Ingredients_IngredientBaseId",
+                table: "Ingredients",
                 column: "IngredientBaseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Ingredient");
+                name: "Ingredients");
 
             migrationBuilder.DropTable(
-                name: "QuestionBases");
+                name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Cocktail");
+                name: "Cocktails");
 
             migrationBuilder.DropTable(
                 name: "IngredientBase");
 
             migrationBuilder.DropTable(
-                name: "Origin");
+                name: "Origins");
         }
     }
 }

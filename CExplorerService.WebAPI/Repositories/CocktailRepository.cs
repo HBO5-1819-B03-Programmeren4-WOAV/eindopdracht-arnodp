@@ -30,16 +30,30 @@ namespace CExplorerService.WebAPI.Repositories
                 .OrderBy(c => c.Name).ToListAsync();
         }
 
-        public async Task<CocktailDetailed> GetDetailed(int id)
+        public async Task<Cocktail> GetDetailed(int id)
         {
-            return await db.Cocktails.Where(c => c.Id == id)
-                .ProjectTo<CocktailDetailed>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
+            //return await db.Cocktails.Where(c => c.Id == id)
+            //    .ProjectTo<CocktailDetailed>(mapper.ConfigurationProvider)
+            //    .FirstOrDefaultAsync();
 
-            //return await db.Cocktails
-            //    .Include(c => c.Origin)
-            //    .Include(c => c.Ingredients)
-            //    .FirstOrDefaultAsync(c => c.Id == id);
+            var C =  await db.Cocktails
+                .Include(c => c.Origin)
+                .Include(c => c.Ingredients)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            foreach(Ingredient i in C.Ingredients)
+            {
+                i.Cocktail = null;
+            }
+
+
+            return C;
+        }
+
+        public async Task updateCocktail(Cocktail cocktail)
+        {
+            int ingrcount = cocktail.Ingredients.Count();
+            cocktail.Ingredients.ElementAt(ingrcount).Id = db.Ingredients.LastOrDefaultAsync().Id + 1;
         }
     }
 }
