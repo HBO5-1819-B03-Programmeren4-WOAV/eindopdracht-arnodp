@@ -48,12 +48,12 @@ namespace CExplorerService.WebAPI.Controllers
             return Ok(test);
         }
 
-        [HttpPut]
-        [Route("{id}")]
-        public async Task Put([FromBody] Cocktail cocktail)
-        {
-             await repository.updateCocktail(cocktail);
-        }
+        //[HttpPut]
+        //[Route("{id}")]
+        //public async Task Put([FromBody] Cocktail cocktail)
+        //{
+        //     await repository.updateCocktail(cocktail);
+        //}
 
         //[HttpPost]
         //public async override Task<IActionResult> Post([FromBody] Cocktail cocktail )

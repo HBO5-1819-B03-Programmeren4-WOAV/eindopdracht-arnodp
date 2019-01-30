@@ -6,16 +6,14 @@ var app = new Vue({
     data: {
         message: 'Loading',
         cocktails: null,
-        isReadOnly: true,
         currentCocktail: null,
-        ingredients: null,
-        CanAddIngredient: false,
-        addBtn_Text: 'Add Ingredient',
-        NewIngredient: {name : '', volume: null, dosage : '', id : 0},
+        //ingredients: null,
+        //newCocktail: null,
     },
     created: function () {
         var self = this;
         self.fetchCocktails();
+        //self.fetchIngredients();
     },
    
     methods: {
@@ -30,44 +28,29 @@ var app = new Vue({
                         fetchCocktailDetails(seld.cocktails[0]);
                     }
                 });
-
         },
 
-        //getCocktailClass: function (cocktail) {
-        //    if (cocktail.isActive) return 'list-group-item active';
-        //    return 'list-group-item';
+        //fetchIngredients: function () {
+        //    fetch(`${apiURL}Ingredients`)
+        //        .then(res => res.json())
+        //        .then(function (res) {
+        //            debugger;
+        //            this.ingredients = res;
+        //        });
         //},
 
         fetchCocktailDetails: function (cocktail) {
             self = this;
-            if (!self.isReadOnly) return;
             debugger;
             fetch(`${apiURL}Cocktails/detailed/${cocktail.id}`)
                 .then(resp => resp.json())
                 .then(function (resp) {
-                    debugger;
                     self.currentCocktail = resp;
                 }).catch(err => console.error('Fout: ' + err));
         },
 
-        addIngredient: function () {
-            if (!this.CanAddIngredient) {
-                this.CanAddIngredient = true;
-                this.addBtn_Text = 'Save';
-            }
-            else {
-                debugger;
-                this.currentCocktail.ingredients.push({ volume: this.NewIngredient.volume, dosage: this.NewIngredient.dosage, cocktailId: this.currentCocktail.id,cocktail: null ,ingredientBase: {name: this.NewIngredient.name}});
-                this.SaveCocktail();
-                debugger;
-                this.CanAddIngredient = false;
-                this.addBtn_Text = 'Add Ingredient';
-                this.resetNewIngredient();
-            }
-           
-        },
-
-        SaveCocktail: function () {
+        UpdateCocktail: function () {
+            debugger;
             var ajaxHeaders = new Headers();
             ajaxHeaders.append("Content-Type", "application/json");
             var ajaxConfig = {
@@ -80,15 +63,8 @@ var app = new Vue({
             fetch(myRequest)
                 .then(res => res.json())
                 .then(res => {
-                    debugger;
                 })
                 .catch(err => console.error('Fout: ' + err));
-        },
-
-        resetNewIngredient: function () {
-            this.NewIngredient.name = '';
-            this.NewIngredient.volume = 0;
-            this.NewIngredient.dosage = '';
         },
     }
 });

@@ -46,14 +46,14 @@ namespace CExplorerService.WebAPI.Repositories
                 i.Cocktail = null;
             }
 
-
             return C;
         }
 
-        public async Task updateCocktail(Cocktail cocktail)
-        {
-            int ingrcount = cocktail.Ingredients.Count();
-            cocktail.Ingredients.ElementAt(ingrcount).Id = db.Ingredients.LastOrDefaultAsync().Id + 1;
-        }
+        //public async Task updateCocktail(Cocktail cocktail)
+        //{
+        //    int ingrcount = cocktail.Ingredients.Count();
+        //    cocktail.Ingredients.ElementAt(ingrcount).Id = db.Ingredients.LastOrDefaultAsync().Id + 1;
+        //    db.Cocktails.Update(cocktail);
+        //}
     }
 }

@@ -22,7 +22,7 @@
 
                 <label class="col-sm-2 control-label">Origin</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" v-model="currentCocktail.origin.country" />
+                    <input type="text" class="form-control" v-model="currentCocktail.origin.country"/>
                 </div>
             </div>
         </div>
@@ -35,17 +35,12 @@
             </div>
             <div class="col-md-12">
                 <div v-for="ingredient in currentCocktail.ingredients">
-                    <input :value="ingredient.ingredientBase.name" />
-                    <input :value="ingredient.volume" />
-                    <input :value="ingredient.dosage" />
-                </div>
-                <div v-if="CanAddIngredient">
-                    <input v-model="NewIngredient.name" placeholder="name" />
-                    <input v-model="NewIngredient.volume" placeholder="ex. 2.5 or 5" />
-                    <input v-model="NewIngredient.dosage" placeholder="ex. cl or teaspoon" />
+                    <input v-model="ingredient.name" />
+                    <input v-model="ingredient.volume" />
+                    <input v-model="ingredient.dosage"/>
                 </div>
                 <div>
-                    <button class="btn btn-primary" v-on:click="addIngredient">{{addBtn_Text}}</button>
+                    <button class="btn btn-primary" v-on:click="UpdateCocktail">Save Changes</button>
                 </div>
             </div>
         </div>

@@ -5,9 +5,10 @@ namespace CExplorerService.lib.Models
 {
     public class Ingredient : EntityBase
     {
-        public IngredientBase IngredientBase { get; set; }
-        public int IngredientBaseId { get; set; }
+        //public IngredientBase IngredientBase { get; set; }
+        //public int IngredientBaseId { get; set; }
 
+        public string Name { get; set; }
         public double Volume { get; set; }
         public string Dosage { get; set; }
 

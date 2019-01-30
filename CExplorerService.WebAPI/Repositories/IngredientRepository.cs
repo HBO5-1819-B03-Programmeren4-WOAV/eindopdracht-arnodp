@@ -24,10 +24,14 @@ namespace CExplorerService.WebAPI.Repositories
         public async Task<List<IngredientBasic>> GetIngredientsBasic(int id)
         {
             return await db.Ingredients
+                .Where(i => i.CocktailId == id)
                 .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider)
                 .ToListAsync();
+        }
 
-            //.Where(i => i.CocktailId == id)
+        public async Task<List<IngredientBasicWithId>> GetAllIngredientsBasicid()
+        {
+            return await db.Ingredients.ProjectTo<IngredientBasicWithId>(mapper.ConfigurationProvider).ToListAsync();
         }
     }
 }

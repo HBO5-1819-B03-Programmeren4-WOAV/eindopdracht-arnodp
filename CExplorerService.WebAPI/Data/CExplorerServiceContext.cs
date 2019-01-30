@@ -56,34 +56,34 @@ namespace CExplorerService.WebAPI.Data
                 );
 
             modelBuilder.Entity<Ingredient>().ToTable("Ingredients").HasData(
-                new Ingredient { CocktailId = 1, Id = 1, IngredientBaseId = 1, Volume = 5, Dosage = "cl" },
-                new Ingredient { CocktailId = 1, Id = 2, IngredientBaseId = 2, Volume = .5, Dosage = "cut into 4 wedges" },
-                new Ingredient { CocktailId = 1, Id = 3, IngredientBaseId = 3, Volume = 2, Dosage = "teaspoons" },
+                new Ingredient {Name = "Cachaça", CocktailId = 1, Id = 1,  Volume = 5, Dosage = "cl" },
+                new Ingredient {Name = "Lime", CocktailId = 1, Id = 2,  Volume = .5, Dosage = "cut into 4 wedges" },
+                new Ingredient {Name = "Sugar", CocktailId = 1, Id = 3,  Volume = 2, Dosage = "teaspoons" },
 
-                new Ingredient { CocktailId = 2, Id = 4, IngredientBaseId = 4, Volume = 4, Dosage = "cl" },
-                new Ingredient { CocktailId = 2, Id = 5, IngredientBaseId = 5, Volume = 2, Dosage = "cl" },
-                new Ingredient { CocktailId = 2, Id = 6, IngredientBaseId = 6, Volume = 1.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 2, Id = 7, IngredientBaseId = 7, Volume = 1.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 2, Id = 8, IngredientBaseId = 8, Volume = 1, Dosage = "cl" },
+                new Ingredient {Name = "White Rum", CocktailId = 2, Id = 4,  Volume = 4, Dosage = "cl" },
+                new Ingredient {Name = "Dark Rum", CocktailId = 2, Id = 5,  Volume = 2, Dosage = "cl" },
+                new Ingredient {Name = "Orange Curaçao", CocktailId = 2, Id = 6,  Volume = 1.5, Dosage = "cl" },
+                new Ingredient {Name = "Orgeat Syrup", CocktailId = 2, Id = 7,  Volume = 1.5, Dosage = "cl" },
+                new Ingredient {Name = "Lime Juice", CocktailId = 2, Id = 8,  Volume = 1, Dosage = "cl" },
 
-                new Ingredient { CocktailId = 3, Id = 9, IngredientBaseId = 9, Volume = 1.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 3, Id = 10, IngredientBaseId = 10, Volume = 1.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 3, Id = 11, IngredientBaseId = 4, Volume = 1.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 3, Id = 12, IngredientBaseId = 11, Volume = 3, Dosage = "cl" },
-                new Ingredient { CocktailId = 3, Id = 13, IngredientBaseId = 12, Volume = 1.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 3, Id = 14, IngredientBaseId = 13, Volume = 1.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 3, Id = 15, IngredientBaseId = 14, Volume = 2.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 3, Id = 16, IngredientBaseId = 15, Volume = 1, Dosage = "dash" },
+                new Ingredient {Name = "Tequila", CocktailId = 3, Id = 9,  Volume = 1.5, Dosage = "cl" },
+                new Ingredient {Name = "Vodka", CocktailId = 3, Id = 10, Volume = 1.5, Dosage = "cl" },
+                new Ingredient {Name = "White Rum", CocktailId = 3, Id = 11, Volume = 1.5, Dosage = "cl" },
+                new Ingredient {Name = "Gomme Syrup", CocktailId = 3, Id = 12, Volume = 3, Dosage = "cl" },
+                new Ingredient {Name = "Triple Sec", CocktailId = 3, Id = 13, Volume = 1.5, Dosage = "cl" },
+                new Ingredient {Name = "Gin", CocktailId = 3, Id = 14, Volume = 1.5, Dosage = "cl" },
+                new Ingredient {Name = "Lemon Juice", CocktailId = 3, Id = 15, Volume = 2.5, Dosage = "cl" },
+                new Ingredient {Name = "Coke", CocktailId = 3, Id = 16, Volume = 1, Dosage = "dash" },
 
-                new Ingredient { CocktailId = 4, Id = 17, IngredientBaseId = 13, Volume = 4.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 4, Id = 18, IngredientBaseId = 14, Volume = 3, Dosage = "cl" },
-                new Ingredient { CocktailId = 4, Id = 19, IngredientBaseId = 16, Volume = 1.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 4, Id = 20, IngredientBaseId = 17, Volume = 6, Dosage = "cl" },
+                new Ingredient {Name = "Gin", CocktailId = 4, Id = 17, Volume = 4.5, Dosage = "cl" },
+                new Ingredient {Name = "Lemon Juice", CocktailId = 4, Id = 18, Volume = 3, Dosage = "cl" },
+                new Ingredient {Name = "Sugar Syrup", CocktailId = 4, Id = 19, Volume = 1.5, Dosage = "cl" },
+                new Ingredient {Name = "Sparkling Water", CocktailId = 4, Id = 20, Volume = 6, Dosage = "cl" },
 
-                new Ingredient { CocktailId = 5, Id = 21, IngredientBaseId = 18, Volume = 4.5, Dosage = "cl" },
-                new Ingredient { CocktailId = 5, Id = 22, IngredientBaseId = 8, Volume = 3, Dosage = "cl" },
-                new Ingredient { CocktailId = 5, Id = 23, IngredientBaseId = 16, Volume = 2, Dosage = "cl" },
-                new Ingredient { CocktailId = 5, Id = 24, IngredientBaseId = 19, Volume = 1, Dosage = "" }
+                new Ingredient {Name = "Pisco", CocktailId = 5, Id = 21, Volume = 4.5, Dosage = "cl" },
+                new Ingredient {Name = "Lime Juice", CocktailId = 5, Id = 22,Volume = 3, Dosage = "cl" },
+                new Ingredient {Name = "Sugar Syrup", CocktailId = 5, Id = 23, Volume = 2, Dosage = "cl" },
+                new Ingredient {Name = "Egg White", CocktailId = 5, Id = 24, Volume = 1, Dosage = "" }
                 );
 
             modelBuilder.Entity<QuestionBase>().ToTable("Questions").HasData(

@@ -15,5 +15,9 @@ namespace CExplorer.MVC.Areas.Admin.Controllers
         {
             return View();
         }
+        public IActionResult NewCocktail()
+        {
+            return View();
+        }
     }
 }

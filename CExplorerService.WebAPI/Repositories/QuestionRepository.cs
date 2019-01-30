@@ -90,8 +90,8 @@ namespace CExplorerService.WebAPI.Repositories
             questionData.correctanswer = correctanswer.name;
 
             //
-            var CA = await db.Ingredients.Include(i => i.IngredientBase)
-                .Where(i => i.IngredientBase.Name == correctanswer.name).FirstOrDefaultAsync();
+            var CA = await db.Ingredients
+                .Where(i => i.Name == correctanswer.name).FirstOrDefaultAsync();
 
             //generate 3 random ingredients
             List<int> ids = new List<int>();
@@ -109,16 +109,16 @@ namespace CExplorerService.WebAPI.Repositories
             ids.Insert(rndId, CA.Id);
             
             //set answers
-            questionData.Answer1 = db.Ingredients.Where(i => i.Id == ids[0]).Include(i => i.IngredientBase)
+            questionData.Answer1 = db.Ingredients.Where(i => i.Id == ids[0])
                                 .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider).FirstOrDefaultAsync().Result.name;
 
-            questionData.Answer2 = db.Ingredients.Where(i => i.Id == ids[1]).Include(i => i.IngredientBase)
+            questionData.Answer2 = db.Ingredients.Where(i => i.Id == ids[1])
                                 .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider).FirstOrDefaultAsync().Result.name;
 
-            questionData.Answer3 = db.Ingredients.Where(i => i.Id == ids[2]).Include(i => i.IngredientBase)
+            questionData.Answer3 = db.Ingredients.Where(i => i.Id == ids[2])
                                 .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider).FirstOrDefaultAsync().Result.name;
 
-            questionData.Answer4 = db.Ingredients.Where(i => i.Id == ids[3]).Include(i => i.IngredientBase)
+            questionData.Answer4 = db.Ingredients.Where(i => i.Id == ids[3])
                                 .ProjectTo<IngredientBasic>(mapper.ConfigurationProvider).FirstOrDefaultAsync().Result.name;
 
             return questionData;
